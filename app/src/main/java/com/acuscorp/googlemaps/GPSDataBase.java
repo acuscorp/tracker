@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 /**
  * Created by Noé Adrian Acuna Prado on 28/02/2020.
- * Sistema BEA
+ *
  * acuscorp@gmail.com
  */
 @Database(entities = {GPS.class},version = 1,exportSchema = false)

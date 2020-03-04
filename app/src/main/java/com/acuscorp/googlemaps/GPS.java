@@ -11,7 +11,7 @@ import java.util.Locale;
 
 /**
  * Created by Noé Adrian Acuna Prado on 28/02/2020.
- * Sistema BEA
+ *
  * acuscorp@gmail.com
  */
 @Entity(tableName = "gps_table")

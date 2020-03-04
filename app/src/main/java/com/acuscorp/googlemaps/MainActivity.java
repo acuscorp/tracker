@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
 //        GoogleMap.OnMyLocationClickListener{
     private static final String TAG = "MainActivity";
-
     private static final int LOCATION_PERMISSION = 999;
     public static final int DELETE_DATA = 789;
     private GoogleMap mMap;
@@ -80,13 +79,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         NO_STARTED(0),
         STARTED(1),
         FINISHED(2);
-
         States(int i) {
             this.type = i;
         }
-
         private int type;
-
         public int getNumericType() {
             return type;
         }
@@ -105,11 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION);
-
-
         states = States.NO_STARTED;
-
-
         final RecyclerView recyclerView = findViewById(R.id.recycle_view_gps_data);
         recyclerView.setLayoutManager((new LinearLayoutManager(this)));
         recyclerView.setHasFixedSize(true);
@@ -121,10 +113,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onChanged(List<GPS> gps) {
                 gpsAdapter.submitList(gps);
                 recyclerView.scrollToPosition(gpsAdapter.getItemCount()-1);
-
             }
         });
-
         gpsAdapter.setOnItemClickListener(new GPSAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(GPS gps) {
@@ -136,21 +126,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.putExtra(ShowDataActivity.EXTRA_LATITUDE,gps.getLatitude());
                 intent.putExtra(ShowDataActivity.EXTRA_LONGITUDE,gps.getLongitude());
                 startActivityForResult(intent, DELETE_DATA);
-
-
-
             }
         });
-
-
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         mMap = googleMap;
         // Add a marker in Sydney, Australia, and move the camera.
-
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
@@ -159,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        locationRequest.setFastestInterval(5000);
         locationRequest.setSmallestDisplacement(1);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
