@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public double getCurrentDistance() {
-        return currentDistance;
+        return currentDistance*3600/1000;
     }
     public void resetDistance()
     {
