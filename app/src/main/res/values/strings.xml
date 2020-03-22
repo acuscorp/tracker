@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GoogleMaps</string>
     <string name="google_api_key_acuscorp">AIzaSyAcIo0veQs_4kaX_9L5ssvEX_6wtqXnXYA</string>
+    <string name="prompt_email">User</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">sigin</string>
 </resources>
