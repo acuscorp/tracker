@@ -5,4 +5,5 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">sigin</string>
+    <string name="select_route">PLEASE SELECT YOUR ROUTE</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,20 +25,22 @@ public class MainActivity extends AppCompatActivity implements GPSService.OnLoca
     private static final String TAG = "MainActivity";
 
     private GPSViewModel gpsViewModel;
-    private GPSAdapter gpsAdapter;
+//    private GPSAdapter gpsAdapter;
     private Context context;
     private States states;
     private GPSService gpsService;
     private View popupInputDialogView;
     private String routeName="";
     private EditText userInput;
+    String username;
+
+    private final String user = "com.acuscorp.googlemaps.login.user";
 
 
 
     public enum States {
         NO_STARTED(0),
-        STARTED(1),
-        SAVE_DATA(2);
+        SAVE_DATA(1);
 
         States(int i) {
             this.type = i;
@@ -54,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements GPSService.OnLoca
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+
+
+        username = intent.getStringExtra(user);
         this.context = this;
         init();
         setUpUI();
@@ -61,12 +68,13 @@ public class MainActivity extends AppCompatActivity implements GPSService.OnLoca
     }
 
     private void init() {
-        gpsAdapter = new GPSAdapter();
+//        gpsAdapter = new GPSAdapter();
         gpsViewModel = new ViewModelProvider(this).get(GPSViewModel.class);
         gpsViewModel.getAllGPSdata().observe(this, new Observer<List<GPS>>() {
             @Override
             public void onChanged(List<GPS> gps) {
-                gpsAdapter.submitList(gps);
+//                gpsAdapter.submitList(gps);
+                //here goes the function to send data to the server
             }
         });
     }
@@ -87,25 +95,14 @@ public class MainActivity extends AppCompatActivity implements GPSService.OnLoca
                   switch (states) {
 
                       case NO_STARTED:
-
+                          button.setText("finish");
                           gpsService.resetDistance();
-                          button.setText("Click again for Register your route");
-                          states = States.STARTED;
-
-                          insertDataToDB();
-
-
-                          break;
-
-                      case STARTED:
-                          button.setText("Click again to finish");
-                          alertDialog();
+                          gpsService.setAmartkerOnMap("start " + routeName);
                           states = States.SAVE_DATA;
-
                           break;
                       case SAVE_DATA:
                           button.setText("start");
-                          gpsService.setAmartkerOnMap(routeName);
+                          gpsService.setAmartkerOnMap("end " +routeName);
                           insertDataToDB();
                           states = States.NO_STARTED;
 
@@ -135,39 +132,40 @@ public class MainActivity extends AppCompatActivity implements GPSService.OnLoca
 
 
 
-    private void alertDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-        alertDialogBuilder.setTitle("AusCorp");
-        alertDialogBuilder.setIcon(R.drawable.ic_save);
-        alertDialogBuilder.setCancelable(false);
-        alertDialogBuilder.setView(popupInputDialogView);
-
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                routeName = userInput.getText().toString();
-                                gpsService.setAmartkerOnMap(routeName);
-                            }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-
-
-    }
+//    private void alertDialog() {
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+//        alertDialogBuilder.setTitle("AusCorp");
+//        alertDialogBuilder.setIcon(R.drawable.ic_save);
+//        alertDialogBuilder.setCancelable(false);
+//        alertDialogBuilder.setView(popupInputDialogView);
+//
+//        alertDialogBuilder
+//                .setCancelable(false)
+//                .setPositiveButton("OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//
+//                                routeName = userInput.getText().toString();
+//                                gpsService.setAmartkerOnMap(routeName);
+//                                insertDataToDB();
+//                            }
+//                        })
+//                .setNegativeButton("Cancel",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//
+//
+//        // create alert dialog
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//
+//        // show it
+//        alertDialog.show();
+//
+//
+//    }
 
     @Override
     public void onLocationChange(Location location) {

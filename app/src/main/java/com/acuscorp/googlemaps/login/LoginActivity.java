@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.acuscorp.googlemaps.MainActivity;
 import com.acuscorp.googlemaps.R;
+import com.acuscorp.googlemaps.Route;
+import com.acuscorp.googlemaps.SelectRouteActivity;
 
 public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "LoginActivity";
@@ -23,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
   private String _username="admin", _password="admin";
   private  String username,password;
   private final int LOCATION_PERMISSION = 999;
-
+  private final String user = "com.acuscorp.googlemaps.login.user";
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -45,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         }else if(username.equals(_username)){
 
           if(password.equals(_password)){
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-
+            Intent intent = new Intent(getApplicationContext(), SelectRouteActivity.class);
+            intent.putExtra(user,username);
             startActivity(intent);
           }
           else {

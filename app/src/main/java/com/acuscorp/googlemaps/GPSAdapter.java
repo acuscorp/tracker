@@ -43,10 +43,11 @@ public class GPSAdapter extends ListAdapter<GPS, GPSAdapter.GPSHolder> {
     @Override
     public GPSHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.gps_data_items,parent,false);
+//        View itemView = LayoutInflater.from(parent.getContext())
+////                .inflate(R.layout.gps_data_items,parent,false);
 
-        return new GPSHolder(itemView);
+//        return new GPSHolder(itemView);
+        return null;
     }
 
     @Override
@@ -64,9 +65,9 @@ public class GPSAdapter extends ListAdapter<GPS, GPSAdapter.GPSHolder> {
 
         public GPSHolder(@NonNull View itemView) {
             super(itemView);
-            textViewRute = itemView.findViewById(R.id.tv_rute);
-            textViewLatitude = itemView.findViewById(R.id.tv_longitude);
-            textViewLongitude = itemView.findViewById(R.id.tv_latitude);
+//            textViewRute = itemView.findViewById(R.id.tv_route);
+//            textViewLatitude = itemView.findViewById(R.id.tv_longitude);
+//            textViewLongitude = itemView.findViewById(R.id.tv_latitude);
 
            itemView.setOnClickListener(new View.OnClickListener() {
                @Override
