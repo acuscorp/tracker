@@ -1,9 +1,13 @@
-package com.acuscorp.googlemaps;
+package com.acuscorp.googlemaps.main;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+
+import com.acuscorp.googlemaps.main.database.GPS;
+import com.acuscorp.googlemaps.main.database.GPSDAO;
+import com.acuscorp.googlemaps.main.database.GPSDataBase;
 
 import java.util.List;
 

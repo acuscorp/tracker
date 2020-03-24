@@ -1,4 +1,4 @@
-package com.acuscorp.googlemaps;
+package com.acuscorp.googlemaps.main;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -32,7 +32,7 @@ class GPSService implements OnMapReadyCallback {
 
 
     private LatLng lastLatLon;
-    private PolylineOptions polylineOptions= new PolylineOptions().color(Color.GREEN).width(8f);
+    private PolylineOptions polylineOptions;
     private double lastSpeed;
     private long timeSatmp = 1000;
     private double maxSpeedFilter = 140;
@@ -91,10 +91,13 @@ class GPSService implements OnMapReadyCallback {
                     lastSpeed = speed;
                     location.setSpeed((float) lastSpeed);
                     setLocation(location);
+                    onLocationListener.onLocationChange(location);
                     if(startPlolyline) {
+                        polylineOptions=null;
+                        polylineOptions= new PolylineOptions().color(Color.GREEN).width(8f);
                         mMap.addPolyline(polylineOptions.add(lastLatLon).add(latLng));
                     }
-                    onLocationListener.onLocationChange(location);
+
                 }
                 lastLatLon = latLng;
 
@@ -138,7 +141,7 @@ class GPSService implements OnMapReadyCallback {
     }
     public void setAmartkerOnMap(final String ruteName) {
 
-        startPlolyline = !ruteName.isEmpty();
+        startPlolyline = ruteName.contains("start")?true:false;
         client.getLastLocation().
                 addOnSuccessListener(
                         new OnSuccessListener<Location>() {

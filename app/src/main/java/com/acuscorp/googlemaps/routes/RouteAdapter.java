@@ -1,4 +1,4 @@
-package com.acuscorp.googlemaps;
+package com.acuscorp.googlemaps.routes;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.acuscorp.googlemaps.R;
 
 import java.util.List;
 

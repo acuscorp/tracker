@@ -1,11 +1,12 @@
-package com.acuscorp.googlemaps;
+package com.acuscorp.googlemaps.main;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
+
+import com.acuscorp.googlemaps.main.database.GPS;
 
 import java.util.List;
 

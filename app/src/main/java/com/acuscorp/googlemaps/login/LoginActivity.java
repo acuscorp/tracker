@@ -12,10 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.acuscorp.googlemaps.MainActivity;
 import com.acuscorp.googlemaps.R;
-import com.acuscorp.googlemaps.Route;
-import com.acuscorp.googlemaps.SelectRouteActivity;
+import com.acuscorp.googlemaps.routes.SelectRouteActivity;
+import com.acuscorp.googlemaps.util.Utils;
 
 public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "LoginActivity";
@@ -25,7 +24,9 @@ public class LoginActivity extends AppCompatActivity {
   private String _username="admin", _password="admin";
   private  String username,password;
   private final int LOCATION_PERMISSION = 999;
-  private final String user = "com.acuscorp.googlemaps.login.user";
+  private final Utils utils = Utils.getInstance();
+  private int id;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
       public void onClick(View v) {
         username = et_userName.getText().toString();
         password = et_password.getText().toString();
+        id=1; // we need to ask for the user id
 
         if(username.isEmpty()){
           Toast.makeText(LoginActivity.this, "Please type your username", Toast.LENGTH_SHORT).show();
@@ -48,7 +50,8 @@ public class LoginActivity extends AppCompatActivity {
 
           if(password.equals(_password)){
             Intent intent = new Intent(getApplicationContext(), SelectRouteActivity.class);
-            intent.putExtra(user,username);
+            intent.putExtra( utils.getEXTRA_USER(),username);
+            intent.putExtra(utils.getEXTRA_USER_ID(),id);
             startActivity(intent);
           }
           else {

@@ -1,4 +1,4 @@
-package com.acuscorp.googlemaps;
+package com.acuscorp.googlemaps.routes;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,10 +10,10 @@ import java.util.List;
 public class RouteViewModel extends ViewModel {
 
   private MutableLiveData<List<Route>> routes = new MutableLiveData<>() ;
-  Route rout1 = new  Route(1,"Ruta roja",0.4,0.3);
-  Route rout2 = new  Route(2,"Ruta verde",0.2,0.3);
-  Route rout3 = new  Route(3,"Ruta amarilla",0.4,0.3);
-  Route rout4 = new  Route(4,"Ruta azul",0.2,0.3);
+  Route rout1 = new  Route(1,"Ruta roja",0.4,0.3,0.44,0.33);
+  Route rout2 = new  Route(2,"Ruta verde",0.2,0.3,0.22,0.33);
+  Route rout3 = new  Route(3,"Ruta amarilla",0.4,0.3,0.44,0.33);
+  Route rout4 = new  Route(4,"Ruta azul",0.2,0.3,0.22,0.33);
 
   public RouteViewModel() {
     //instaciacion del repositorio

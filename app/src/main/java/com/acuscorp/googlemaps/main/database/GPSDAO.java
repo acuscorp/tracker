@@ -1,4 +1,4 @@
-package com.acuscorp.googlemaps;
+package com.acuscorp.googlemaps.main.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -22,6 +22,7 @@ public interface GPSDAO {
     void update(GPS gps);
     @Delete
     void delete(GPS gps);
+
 
     @Query("DELETE FROM gps_table")
     void deleteAllGPSData();

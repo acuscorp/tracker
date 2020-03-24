@@ -1,4 +1,4 @@
-package com.acuscorp.googlemaps;
+package com.acuscorp.googlemaps.routes;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.acuscorp.googlemaps.R;
+import com.acuscorp.googlemaps.main.MainActivity;
+import com.acuscorp.googlemaps.util.Utils;
+
 import java.util.List;
 
 public class SelectRouteActivity extends AppCompatActivity {
@@ -29,14 +33,16 @@ public class SelectRouteActivity extends AppCompatActivity {
   private int PAGE_SIZE;
   private int spanCount = 4;
   private String username;
-  private final String user = "com.acuscorp.googlemaps.login.user";
+  private int id;
+  private final Utils utils = Utils.getInstance();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_select_route);
     Intent intent = getIntent();
-    username = intent.getStringExtra(user);
+    username = intent.getStringExtra(utils.getEXTRA_USER());
+    id = intent.getIntExtra(utils.getEXTRA_USER_ID(),0);
     getUIElements();
 
   }
@@ -54,8 +60,10 @@ public class SelectRouteActivity extends AppCompatActivity {
     routeAdapter.setOnItemClickListener(new RouteAdapter.OnItemClickListener() {
       @Override
       public void onItemClick(Route route) {
-        Intent intent = new Intent(SelectRouteActivity.this,MainActivity.class);
-        intent.putExtra(user,username);
+        Intent intent = new Intent(SelectRouteActivity.this, MainActivity.class);
+        intent.putExtra(utils.getEXTRA_USER(),username);
+        intent.putExtra(utils.getEXTRA_USER_ID(),id);
+        intent.putExtra(utils.getEXTRA_OBJECT_ROUTE(),route);
         startActivity(intent);
       }
     });
